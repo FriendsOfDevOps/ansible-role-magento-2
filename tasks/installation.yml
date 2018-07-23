@@ -65,6 +65,13 @@
   when:
     - not magento_release_stat.stat.exists
     - magento_skip_release == False
+    
+- name: Download magento2
+  get_url:
+    url: http://magento.mirror.hypernode.com/releases/magento-2.2.5.tar.gz
+    dest: {{ magento_workdir }}/{{ magento_file_name }}
+  when:
+    - magento_skip_release == True
 
 - name: "Unpack the release"
   unarchive:
