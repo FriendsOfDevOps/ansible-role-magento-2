@@ -163,10 +163,10 @@
     - magento_skip_release == False
 
 - name: Removing cache and generated files
-    file:
+  file:
       path: "{{ item }}"
       state: absent
-    with_items:
+  with_items:
       - /var/www/html/var/cache
       - /var/www/html/generated
     
