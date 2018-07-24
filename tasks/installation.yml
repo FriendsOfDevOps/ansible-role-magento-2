@@ -162,7 +162,7 @@
     - magento_release_updated.changed
     - magento_skip_release == False
     
-- file: state=absent path={{ item.path }}
+- file: state=absent path="{{ item.path }}"
   with_items: "{{ magento_folders }}"
     
 - name: Install db
