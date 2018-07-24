@@ -162,6 +162,9 @@
     - magento_release_updated.changed
     - magento_skip_release == False
     
+- file: state=absent path={{ item.path }}
+  with_items: "{{ magento_folders }}"
+    
 - name: Install db
   shell: sudo -u "{{ magento_user }}" php bin/magento setup:install \
     --cleanup-database \
@@ -188,11 +191,6 @@
   # "--keep-generated" is used as it's the responsibility of the build environment to do the application compilation.
   command: "sudo -u {{ magento_user }} /usr/bin/php {{ magento_app_root }}/bin/magento {{ item }}"
   with_items: "{{ magento_upgrade_commands }}"
-
-- file: state=absent path={{ item.path }}
-  with_items: 
-    - "{{ magento_release_folder }}/generated"
-    - "{{ magento_release_folder }}/var/cache"
 
 - name: "Enforce core configuration data"
   shell:
