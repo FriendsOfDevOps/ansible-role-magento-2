@@ -85,9 +85,9 @@
     - magento_skip_release == False
 
 - name: "Move the release to the releases folder"
-  shell: "mv {{ magento_workdir }} {{ magento_release_folder }}/{{ magento_release_version }}"
+  shell: "mv {{ magento_workdir }} {{ magento_release_folder }}"
   args:
-    creates: "{{ magento_release_folder }}/{{ magento_release_version }}"
+    creates: "{{ magento_release_folder }}"
     removes: "{{ magento_workdir }}"
   when:
     - not magento_release_stat.stat.exists
@@ -103,7 +103,7 @@
 
 - name: "Enable maintenance mode"
   file:
-    path: "{{ magento_release_folder }}/{{ magento_release_version }}/var/.maintenance.flag"
+    path: "{{ magento_release_folder }}/var/.maintenance.flag"
     owner: "{{ magento_user }}"
     group: "{{ magento_group }}"
     state: "touch"
@@ -112,7 +112,7 @@
 
 - name: "Release the application"
   file:
-    src: "{{ magento_release_folder }}/{{ magento_release_version }}"
+    src: "{{ magento_release_folder }}"
     force: "yes"
     path: "{{ magento_app_root }}"
     owner: "{{ magento_user }}"
