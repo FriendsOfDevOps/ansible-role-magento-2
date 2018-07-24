@@ -23,7 +23,6 @@ magento_config_folder: "{{ magento_release_folder }}/{{ magento_release_version 
 
 # Download urls
 magento_download_url: "http://magento.mirror.hypernode.com/releases/magento-{{ magento_release_version }}.tar.gz"
-magento_download_filename: "{{ magento_download_url | basename }}
 
 ## The path that apache is pointed at to serve requested.
 magento_app_root: "/var/www/html"
