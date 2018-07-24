@@ -10,7 +10,7 @@
 
 - name: "Determine if the release already exists"
   stat:
-    path: "{{ magento_release_folder }}/{{ magento_release_version }}"
+    path: "{{ magento_release_folder }}"
   register: "magento_release_stat"
 
 # If cron executes Magento during release, it can create sessions / cache and break stuff
