@@ -57,8 +57,6 @@
   get_url:
     url: "{{ magento_download_url }}"
     dest: "{{ magento_workdir }}/{{ magento_file_name }}"
-  args:
-    creates: "{{ magento_workdir }}/{{ magento_file_name }}"
   when:
     - not magento_release_stat.stat.exists
     - magento_skip_release == False
