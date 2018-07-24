@@ -189,12 +189,18 @@
   command: "sudo -u {{ magento_user }} /usr/bin/php {{ magento_app_root }}/bin/magento {{ item }}"
   with_items: "{{ magento_upgrade_commands }}"
 
-- name: remove cache en generated files
+- name: remove cache files
   file:
     path: "{{ item }}"
     state: absent
   with_fileglob:
     - "{{ magento_release_folder }}/var/cache/*"
+
+- name: remove generated files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_fileglob:
     - "{{ magento_release_folder }}/generated/*"
 
 - name: "Enforce core configuration data"
