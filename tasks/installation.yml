@@ -161,12 +161,20 @@
   when:
     - magento_release_updated.changed
     - magento_skip_release == False
+
+- find: path=/var/www/html/var/cache file_type=directory
+  register: magento_cache_path
+
+- find: path=/var/www/html/generated file_type=directory
+  register: magento_generated_path
     
 - name: "Delete this folders if they exist"
   file:
-    path: "{{ item.dest }}"
+    path: "{{ item.path }}"
     state: "absent"
-  with_items: "{{ magento_folders }}"
+  with_items:
+    - "{{ magento_cache_path }}"
+    - "{{ magento_generated_path }}"
     
 - name: Install db
   shell: sudo -u "{{ magento_user }}" php bin/magento setup:install \
