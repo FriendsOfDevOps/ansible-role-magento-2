@@ -26,9 +26,9 @@
     disabled: "yes"
   with_items: "{{ magento_cron_tasks }}"
 
-- name: "Get the magento filename from the storage path"
+- name: "Get the magento filename from the download path"
   set_fact:
-    magento_file_name: "{{ magento_storage_path | basename }}"
+    magento_file_name: "{{ magento_download_url | basename }}"
   when:
     - not magento_release_stat.stat.exists
     - magento_skip_release == False
@@ -55,8 +55,8 @@
 # This expects to authenticat based on the invokers AWS credentials, supplied through environment variables
 - name: "Download Magento release"
   get_url:
-    url: "http://magento.mirror.hypernode.com/releases/magento-{{ magento_release_version }}.tar.gz"
-    dest: "/tmp"
+    url: "{{ magento_download_url }}"
+    dest: "{{ magento_workdir }}/{{ magento_file_name }}"
   args:
     creates: "{{ magento_workdir }}/{{ magento_file_name }}"
   when:
