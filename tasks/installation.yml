@@ -191,7 +191,7 @@
     --key="{{ magento_crypt_key }}" \
     --base-url="{{ magento_base_url }}"
   args:
-    chdir: /home/vagrant/repos/magento2
+    chdir: "{{ magento_app_root }}"
 
 - name: "Perform any schema upgrades that are required"
   # "--keep-generated" is used as it's the responsibility of the build environment to do the application compilation.
