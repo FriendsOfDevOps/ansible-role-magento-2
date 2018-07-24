@@ -64,7 +64,7 @@
 - name: "Unpack the release"
   unarchive:
     src: "{{ magento_workdir }}/{{ magento_file_name }}"
-    dest: "{{ magento_workdir }}"
+    dest: "{{ magento_release_folder }}"
     remote_src: true
   when:
     - not magento_release_stat.stat.exists
@@ -79,16 +79,7 @@
     - magento_skip_release == False
 
 - name: "Set the permission on the release"
-  shell: "chown -R {{ magento_user }}:{{ magento_group }} {{ magento_workdir }}"
-  when:
-    - not magento_release_stat.stat.exists
-    - magento_skip_release == False
-
-- name: "Move the release to the releases folder"
-  shell: "mv {{ magento_workdir }} {{ magento_release_folder }}"
-  args:
-    creates: "{{ magento_release_folder }}"
-    removes: "{{ magento_workdir }}"
+  shell: "chown -R {{ magento_user }}:{{ magento_group }} {{ magento_release_folder }}"
   when:
     - not magento_release_stat.stat.exists
     - magento_skip_release == False
