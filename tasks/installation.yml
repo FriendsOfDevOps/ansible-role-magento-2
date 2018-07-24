@@ -163,7 +163,7 @@
     - magento_skip_release == False
     
 - name: Install db
-  shell: php bin/magento setup:install \
+  shell: sudo -u "{{ magento_user }}" php bin/magento setup:install \
     --cleanup-database \
     --backend-frontname="{{ magento_backend_frontname }}" \
     --session-save=db \
