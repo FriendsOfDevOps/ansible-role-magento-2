@@ -55,8 +55,8 @@
 # This expects to authenticat based on the invokers AWS credentials, supplied through environment variables
 - name: "Download Magento release"
   get_url:
-    url: http://magento.mirror.hypernode.com/releases/magento-2.2.5.tar.gz
-    dest: "{{ magento_workdir }}"
+    url: "http://magento.mirror.hypernode.com/releases/magento-{{ magento_release_version }}.tar.gz"
+    dest: "/tmp"
   args:
     creates: "{{ magento_workdir }}/{{ magento_file_name }}"
   when:
