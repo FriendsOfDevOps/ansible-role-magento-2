@@ -19,7 +19,7 @@
 
 ## Where the environment configuratoin is to be stored.
 ## Defaults in the current release app/etc/"
-magento_config_folder: "{{ magento_release_folder }}/{{ magento_release_version }}/app/etc/"
+magento_config_folder: "{{ magento_release_folder }}/app/etc/"
 
 # Download urls
 magento_download_url: "http://magento.mirror.hypernode.com/releases/magento-{{ magento_release_version }}.tar.gz"
