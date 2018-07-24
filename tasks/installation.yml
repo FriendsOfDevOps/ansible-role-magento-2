@@ -162,7 +162,10 @@
     - magento_release_updated.changed
     - magento_skip_release == False
     
-- file: state=absent path="{{ item.path }}"
+- name: "Delete this folders if they exist"
+  file:
+    path: "{{ item.dest }}"
+    state: "absent"
   with_items: "{{ magento_folders }}"
     
 - name: Install db
