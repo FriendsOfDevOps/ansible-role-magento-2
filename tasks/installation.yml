@@ -162,19 +162,13 @@
     - magento_release_updated.changed
     - magento_skip_release == False
 
-- find: path=/var/www/html/var/cache file_type=directory
-  register: magento_cache_path
-
-- find: path=/var/www/html/generated file_type=directory
-  register: magento_generated_path
-    
-- name: "Delete this folders if they exist"
-  file:
-    path: "{{ item.path }}"
-    state: "absent"
-  with_items:
-    - "{{ magento_cache_path }}"
-    - "{{ magento_generated_path }}"
+- name: Removing cache and generated files
+    file:
+      path: "{{ item }}"
+      state: absent
+    with_items:
+      - /var/www/html/var/cache
+      - /var/www/html/generated
     
 - name: Install db
   shell: sudo -u "{{ magento_user }}" php bin/magento setup:install \
